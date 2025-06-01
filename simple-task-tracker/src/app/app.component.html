@@ -2,12 +2,22 @@
   <h1>Simple Task Tracker</h1>
 
   <div class="task-input-area">
-    <input type="text" class="task-input" placeholder="What needs to be done?" />
-    <button class="add-task-btn">Add Task</button>
+    <input type="text" class="task-input" placeholder="What needs to be done?" [(ngModel)]="newTaskTitle"
+      (keyup.enter)="addTask()" />
+    <button class="add-task-btn" (click)="addTask()">Add Task</button>
   </div>
 
   <div class="task-list-area">
     <h2>My Tasks</h2>
-    <p *ngIf="true"><em>No tasks yet! Add one above.</em></p>
+
+    <ul *ngIf="tasks.length > 0; else noTasks">
+      <li *ngFor="let task of tasks">
+        {{task.title}}
+      </li>
+    </ul>
+
+    <ng-template #noTasks>
+      <p *ngIf="true"><em>No tasks yet! Add one above.</em></p>
+    </ng-template>
   </div>
 </div>
