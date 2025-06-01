@@ -23,4 +23,8 @@ export class AppComponent {
     this.tasks.push(newTask);
     this.newTaskTitle = '';
   }
+
+  toggleComplete(task: any) {
+    task.completed = !task.completed;
+  }
 }

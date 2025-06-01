@@ -47,3 +47,33 @@ h1 {
   color: #777;
   font-style: italic;
 }
+
+.task-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.task-list li {
+  display: flex;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.task-list li:last-child {
+  border-bottom: none;
+}
+
+.task-checkbox {
+  margin-right: 10px;
+  transform: scale(1.2);
+}
+
+.task-title {
+  flex-grow: 1;
+}
+
+.completed-task .task-title {
+  text-decoration: line-through;
+  color: #aaa;
+}

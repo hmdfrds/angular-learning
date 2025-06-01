@@ -10,9 +10,10 @@
   <div class="task-list-area">
     <h2>My Tasks</h2>
 
-    <ul *ngIf="tasks.length > 0; else noTasks">
-      <li *ngFor="let task of tasks">
-        {{task.title}}
+    <ul *ngIf="tasks.length > 0; else noTasks" class="task-list">
+      <li *ngFor="let task of tasks" [class.completed-task]="task.completed">
+        <input type="checkbox" class="task-checkbox" [checked]="task.completed" (change)="toggleComplete(task)">
+        <span class="task-title">{{task.title}}</span>
       </li>
     </ul>
 
