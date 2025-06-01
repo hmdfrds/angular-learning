@@ -77,3 +77,18 @@ h1 {
   text-decoration: line-through;
   color: #aaa;
 }
+
+.delete-btn {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  margin-left: auto;
+}
+
+.delete-btn:hover {
+  background-color: #c82333;
+}

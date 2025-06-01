@@ -27,4 +27,8 @@ export class AppComponent {
   toggleComplete(task: any) {
     task.completed = !task.completed;
   }
+
+  deleteTask(id: number) {
+    this.tasks = this.tasks.filter((task) => task.id !== id);
+  }
 }
