@@ -1,59 +1,41 @@
-# SimpleTaskTracker
+# Simple Task Tracker
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.14.
+This project is a basic To-Do List application built to practice the fundamentals of Angular.
 
-## Development server
+## What the App Will Do
 
-To start a local development server, run:
+- **Add Tasks**: Input and add new tasks.
+- **View Tasks**: Display the list of tasks.
+- **Mark as Complete**: Visually mark tasks as completed (e.g., strikethrough).
+- **Delete Tasks**: Remove tasks from the list.
+- **Persist Tasks**: Tasks are saved in the browser's local storage.
 
-```bash
-ng serve
-```
+---
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## How It Looks and Behaves
 
-## Code scaffolding
+![Simple Task Tracker Demo](./assets/demo1.gif)
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+---
 
-```bash
-ng generate component component-name
-```
+## Core Angular Concepts Touched
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+This project provides a hands-on introduction to:
 
-```bash
-ng generate --help
-```
+- **Components**: `AppComponent`, potentially `TaskListComponent` or `TaskItemComponent`.
+- **Templates (HTML)**: Structuring component views.
+- **Data Binding**:
+  - One-way binding (displaying task data).
+  - Two-way binding (e.g., `[(ngModel)]` for the input field).
+  - Event binding (e.g., `(click)` for actions).
+- **Directives**:
+  - `*ngFor`: Looping through tasks.
+  - `*ngIf`: Conditional display (e.g., for an empty task list message).
+  - `[ngClass]` or `[ngStyle]`: Dynamic styling for tasks.
+- **Basic TypeScript**: Using types and classes.
+- **Services (Optional)**: Managing task data and logic (e.g., `TaskService`).
+- **Angular CLI**: Generating projects, components, and services.
 
-## Building
+---
 
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+**Goal**: Focus on understanding Angular basics and getting core functionality working.
