@@ -2,7 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { WeatherResponse } from '../models/weeather.model';
-import { WEATHER_MAP_API_KEY } from '../../environment';
+import { WEATHER_API_KEY } from '../../environment';
 
 @Injectable({
   providedIn: 'root',
@@ -14,7 +14,7 @@ export class WeatherService {
 
   getWeatherForCity(cityName: string): Observable<WeatherResponse> {
     const params = new HttpParams()
-      .set('key', WEATHER_MAP_API_KEY)
+      .set('key', WEATHER_API_KEY)
       .set('q', cityName)
       .set('aqi', 'no');
 

@@ -2,6 +2,14 @@
   <h1>{{title}}</h1>
 </header>
 
+<section class="search-section">
+  <form (ngSubmit)="onSearch()">
+    <input type="text" [(ngModel)]="searchCityName" name="cityNameInput" placeholder="Enter city name"
+      aria-label="City Name">
+    <button type="submit">Search</button>
+  </form>
+</section>
+
 <main>
   <section class="loading-indicator" *ngIf="isLoading">
     <p>Loading...</p>
@@ -23,7 +31,9 @@
     </div>
 
     <div>
-      <img [src]="'https:'+ weatherData.current.condition.icon" [alt]="weatherData.current.condition.text">
+      <img
+        [src]="weatherData.current.condition.icon.startsWith('//') ? 'https:' + weatherData.current.condition.icon: weatherData.current.condition.icon"
+        [alt]="weatherData.current.condition.text">
     </div>
 
     <div>
