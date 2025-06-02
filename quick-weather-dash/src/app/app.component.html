@@ -20,32 +20,26 @@
   </section>
 
   <section class="weather-display" *ngIf="weatherData && !isLoading && !errorMessage">
-    <h2>Current Weather in {{weatherData.location.name}}</h2>
+    <h2>{{weatherData.location.name}}</h2>
 
-    <div>
-      <strong>Temperature:</strong> {{ weatherData.current.temp_c}} °C
-    </div>
-
-    <div>
-      <strong>Condition:</strong>{{ weatherData.current.condition.text}}
-    </div>
-
-    <div>
+    <div class="weather-main">
       <img
         [src]="weatherData.current.condition.icon.startsWith('//') ? 'https:' + weatherData.current.condition.icon: weatherData.current.condition.icon"
         [alt]="weatherData.current.condition.text">
+      <p class="condition-text">{{weatherData.current.condition.text}}</p>
+      <p class="temp">{{weatherData.current.temp_c}}°C</p>
     </div>
 
-    <div>
-      <strong>Feels Like:</strong> {{weatherData.current.feelslike_c}} °C
-    </div>
-
-    <div>
-      <strong>Humidity:</strong> {{weatherData.current.humidity}}%
-    </div>
-
-    <div>
-      <strong>Wind Speed:</strong> {{weatherData.current.wind_kph}} km/h
+    <div class="weather-info-grid">
+      <div class="weather-detail">
+        <strong>Feels Like</strong><span>{{weatherData.current.feelslike_c}} °C</span>
+      </div>
+      <div class="weather-detail">
+        <strong>Humidity</strong><span>{{weatherData.current.humidity}}%</span>
+      </div>
+      <div class="weather-detail">
+        <strong>Wind Speed</strong><span>{{weatherData.current.wind_kph}} km/h</span>
+      </div>
     </div>
   </section>
 </main>
