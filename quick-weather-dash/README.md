@@ -1,59 +1,67 @@
-# QuickWeatherDash
+# Quick Weather Dash
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.14.
+This project is a weather dashboard application built to practice fetching and displaying data from an external API, along with other fundamental Angular concepts.
 
-## Development server
+## What the App Does
 
-To start a local development server, run:
+- **Fetch Default Weather**: Automatically fetches and displays the current weather for a pre-set default city (e.g., Petaling Jaya) when the application loads.
+- **Search by City**: Allows users to type a city name into a search field and fetch weather data for that specific city.
+- **Display Weather Details**: Shows key current weather information, including:
+  - City Name
+  - Current Temperature (in Celsius)
+  - Weather Condition (e.g., "Sunny," "Cloudy," "Rain")
+  - An Icon representing the current weather
+  - "Feels Like" Temperature (in Celsius)
+  - Humidity (%)
+  - Wind Speed (e.g., km/h)
+- **Loading State**: Displays a "Loading..." message or indicator while weather data is being fetched.
+- **Error Handling**: Shows user-friendly error messages if the API call fails (e.g., city not found, network error).
 
-```bash
-ng serve
-```
+---
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## How It Looks and Behaves
 
-## Code scaffolding
+![Simple Task Tracker Demo](./assets/demo1.gif)
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+---
 
-```bash
-ng generate component component-name
-```
+## Core Angular Concepts Touched
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+This project provides a hands-on introduction to:
 
-```bash
-ng generate --help
-```
+- **Angular CLI**: Used for generating the project structure, components, and services.
+- **Components**: The main `AppComponent` (or a dedicated `WeatherDashboardComponent`) manages the view and user interactions.
+- **Services (`WeatherService`)**: Created to encapsulate the logic for fetching data from the weather API and managing the API key.
+- **`HttpClientModule` & `HttpClient`**: Leveraged for making HTTP GET requests to the external weather API.
+- **Observables (RxJS)**: Essential for handling asynchronous API responses. This includes:
+  - `subscribe()`: To receive data from the Observable.
+  - `pipe()` and `map()`: To transform the API response (e.g., ensuring icon URLs are correct).
+  - Error handling within the subscription.
+- **TypeScript Interfaces**: Defined to model the structure of the API response data, ensuring type safety.
+- **Templates (HTML)**: Used to structure the component's view, displaying weather data and search forms.
+- **Data Binding**:
+  - One-way binding (`{{ }}` and `[property]`): For displaying weather information.
+  - Two-way binding (`[(ngModel)]`): For the city search input field.
+  - Event binding (`(click)`, `(ngSubmit)`): For triggering searches.
+- **Directives**:
+  - `*ngIf`: For conditionally rendering elements like the loading indicator, error messages, and the weather data display area.
+- **Forms (Template-driven)**: A simple form with `ngModel` was used to capture the city name for searching.
 
-## Building
+---
 
-To build the project run:
+## API Used
 
-```bash
-ng build
-```
+This project utilizes the **[WeatherAPI.com](https://www.weatherapi.com/)** free tier to fetch current weather data. You will need to sign up for a free API key to run the project.
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+**Set up API Key:**
 
-## Running unit tests
+1. Sign up for a free API key at [WeatherAPI.com](https://www.weatherapi.com/).
+2. Create a new file at `src/environment.ts` file.
+3. and and export `WEATHER_API_KEY` constant and replace `'YOUR_API_KEY'` with your actual API key:
+   ```ts
+   export const WEATHER_API_KEY = "YOUR_API_KEY";
+   ```
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+---
 
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+**Goal**: Focus on understanding how to interact with external APIs in an Angular application, manage asynchronous data using RxJS, and implement dynamic data display and basic user interaction based on that data.
