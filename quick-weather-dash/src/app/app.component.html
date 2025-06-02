@@ -23,9 +23,7 @@
     <h2>{{weatherData.location.name}}</h2>
 
     <div class="weather-main">
-      <img
-        [src]="weatherData.current.condition.icon.startsWith('//') ? 'https:' + weatherData.current.condition.icon: weatherData.current.condition.icon"
-        [alt]="weatherData.current.condition.text">
+      <img [src]=" weatherData.current.condition.icon" [alt]="weatherData.current.condition.text">
       <p class="condition-text">{{weatherData.current.condition.text}}</p>
       <p class="temp">{{weatherData.current.temp_c}}°C</p>
     </div>
