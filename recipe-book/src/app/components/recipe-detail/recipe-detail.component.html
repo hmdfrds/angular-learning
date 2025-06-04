@@ -1,1 +1,56 @@
-<p>recipe-detail works!</p>
+<div class="recipe-detail-container" *ngIf="(recipe$ | async) as recipe; else loadingOrNotFound">
+    <div *ngIf="recipe; else notFound">
+        <div class="recipe-header">
+            <h1>{{recipe.name}}</h1>
+            <div class="action">
+                <button class="edit-btn" (click)="editRecipe(recipe.id)">Edit Recipe</button>
+                <button class="delete-btn" (click)="deleteRecipe(recipe.id)">Delete Recipe</button>
+            </div>
+        </div>
+
+        <img [src]="recipe.imageUrl || 'https://picsum.photos/600/400?random=' +recipe.id" alt="{{recipe.name}}"
+            class="recipe-image-large">
+
+        <p class="description">{{recipe.description}}</p>
+
+        <div class="recipe-meta">
+            <span><strong>Prep Time:</strong> {{recipe.prepTime}} minutes</span>
+            <span><strong>Cook Time:</strong> {{recipe.cookTime}} minutes</span>
+            <span><strong>Servings:</strong> {{recipe.servings}} people</span>
+        </div>
+
+        <div class="ingredients-section">
+            <h2>Ingredients</h2>
+            <ul>
+                <li *ngFor="let ingredient of recipe.ingredients">
+                    {{ ingredient.quantity }} {{ingredient.unit}} {{ingredient.name}}
+                </li>
+            </ul>
+        </div>
+
+        <div class="instructions-section">
+            <h2>Instructions</h2>
+            <ol>
+                <li *ngFor="let step of recipe.instructions; let i = index">
+                    <strong>Step {{i+1}}:</strong> {{step.description}}
+                </li>
+            </ol>
+        </div>
+
+        <button class="back-btn" routerLink="/recipes">Back to Recipe List</button>
+    </div>
+</div>
+
+<ng-template #loadingOrNotFound>
+    <p class="info-message">
+        Loading recipe details...
+    </p>
+</ng-template>
+
+<ng-template #notFound>
+    <div class="recipe-not-found">
+        <h2>Recipe Not Found</h2>
+        <p>Sorry, we couldn't find the recipe you're looking for.</p>
+        <button class="back-btn" routerLink="/recipes">Back to Recipe List</button>
+    </div>
+</ng-template>
