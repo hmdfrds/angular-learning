@@ -1,1 +1,30 @@
-<p>recipe-list works!</p>
+<div class="recipe-list-container">
+    <div class="header-controls">
+        <h2>Available Recipes</h2>
+        <button class="add-recipe-btn" routerLink="/recipes/new">
+            Add New Recipe
+        </button>
+    </div>
+
+    <div *ngIf="(recipes$| async) as recipes; else loadingOrError">
+        <div class="recipe-grid" *ngIf="recipes.length > 0; else noRecipes">
+            <div class="recipe-card" *ngFor="let recipe of recipes" [routerLink]="['/recipes', recipe.id]">
+                <img [src]="recipe.imageUrl || 'https://picsum.photos/300/200?random=' + recipe.id"
+                    alt="{{recipe.name}}" class="recipe-thumbnail">
+                <div class="recipe-card-content">
+                    <h3>{{recipe.name}}</h3>
+                    <p class="recipe-short-desc">{{ getShortDescription(recipe)}}</p>
+                </div>
+            </div>
+        </div>
+        <ng-template #noRecipes>
+            <p class="info-message">
+                No recipes found. Why not add one?
+            </p>
+        </ng-template>
+    </div>
+
+    <ng-template #loadingOrError>
+        <p class="info-message">Loading recipes...</p>
+    </ng-template>
+</div>
