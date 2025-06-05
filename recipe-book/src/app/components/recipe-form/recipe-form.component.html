@@ -1,1 +1,138 @@
-<p>recipe-form works!</p>
+<div class="form-container">
+    <h2>{{editMode? 'Edit Recipe': 'Add New Recipe' }}</h2>
+
+    <div class="loading-indicator" *ngIf="isLoading">
+        <p>Loading form...</p>
+    </div>
+
+    <form [formGroup]="recipeForm" (ngSubmit)="onSubmit()" *ngIf="!isLoading">
+        <div class="form-group">
+            <label for="name">Recipe Name:</label>
+            <input type="text" id="name" formControlName="name" class="form-control">
+            <div class="validation-errors">
+                <small *ngIf="name?.errors?.['required']">Recipe name is required.</small>
+                <small *ngIf="name?.errors?.['minlength']">Recipe name must be at least 3 characters long.</small>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="description">Description:</label>
+            <textarea id="description" formControlName="description" class="form-control" rows="3"></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="prepTime">Preparation Time (minutes:)</label>
+            <input type="number" id="prepTime" formControlName="prepTime" class="form-control">
+
+            <div *ngIf="prepTime?.invalid && (prepTime?.dirty || prepTime?.touched)" class="validation-errors">
+                <small *ngIf="prepTime?.errors?.['required']">Preparation time is required.</small>
+                <small *ngIf="prepTime?.errors?.['positiveNumber']">Preparation time must be a positive number.</small>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="servings">Servings (people):</label>
+            <input type="number" id="servings" formControlName="servings" class="form-control">
+            <div *ngIf="servings?.invalid && (servings?.dirty || servings?.touched)" class="validation-errors">
+                <small *ngIf="servings?.errors?.['required']">Number of servings is required.</small>
+                <small *ngIf="servings?.errors?.['positiveNumber']">Servings must be a positive number.</small>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="imageUrl">Image URL (optional):</label>
+            <input type="url" id="imageUrl" formControlName="imageUrl" class="form-control">
+        </div>
+
+        <hr>
+
+        <div formArrayName="ingredients" class="form-section">
+            <h3>Ingredients
+                <button type="button" (click)="addIngredient()" class="add-item-btn">+</button>
+            </h3>
+            <div *ngIf="ingredients.invalid && ingredients.touched && ingredients.errors?.['required']"
+                class="validation-errors array-level-error">
+                <small>At least one ingredient is required.</small>
+            </div>
+
+            <div *ngFor="let ingredientGroup of ingredients.controls; let i = index" [formGroupName]="i"
+                class="form-array-item">
+                <h4>Ingredient {{ i + 1 }}
+                    <button type="button" (click)="removeIngredient(i)" class="remove-item-btn"
+                        [disabled]="ingredients.controls.length <= 1">Remove</button>
+                </h4>
+                <div class="ingredient-fields">
+                    <div class="form-group">
+                        <label for="ingredientName{{i}}">Name:</label>
+                        <input type="text" id="ingredientName{{i}}" formControlName="name" class="form-control">
+                        <div *ngIf="getIngredientControl(i, 'name')?.invalid && (getIngredientControl(i, 'name')?.dirty || getIngredientControl(i, 'name')?.touched)"
+                            class="validation-errors">
+                            <small *ngIf="getIngredientControl(i, 'name')?.errors?.['required']">Ingredient name is
+                                required.</small>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ingredientQuantity{{i}}">Quantity:</label>
+                        <input type="number" id="ingredientQuantity{{i}}" formControlName="quantity"
+                            class="form-control">
+                        <div *ngIf="getIngredientControl(i, 'quantity')?.invalid && (getIngredientControl(i, 'quantity')?.dirty || getIngredientControl(i, 'quantity')?.touched)"
+                            class="validation-errors">
+                            <small *ngIf="getIngredientControl(i, 'quantity')?.errors?.['required']">Quantity is
+                                required.</small>
+                            <small *ngIf="getIngredientControl(i, 'quantity')?.errors?.['positiveNumber']">Quantity must
+                                be a positive number.</small>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ingredientUnit{{i}}">Unit:</label>
+                        <input type="text" id="ingredientUnit{{i}}" formControlName="unit" class="form-control">
+                        <div *ngIf="getIngredientControl(i, 'unit')?.invalid && (getIngredientControl(i, 'unit')?.dirty || getIngredientControl(i, 'unit')?.touched)"
+                            class="validation-errors">
+                            <small *ngIf="getIngredientControl(i, 'unit')?.errors?.['required']">Unit is
+                                required.</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <hr>
+
+        <div formArrayName="instructions" class="form-section">
+            <h3>Instructions
+                <button type="button" (click)="addInstruction()" class="add-item-btn">+</button>
+            </h3>
+            <div *ngIf="instructions.invalid && instructions.touched && instructions.errors?.['required']"
+                class="validation-errors array-level-error">
+                <small>At least one instruction step is required.</small>
+            </div>
+
+            <div *ngFor="let instructionControl of instructions.controls; let i = index" class="form-array-item">
+                <div class="form-group instruction-step">
+                    <label for="instructionStep{{i}}">Step {{ i + 1 }}:</label>
+                    <textarea [formControlName]="i" id="instructionStep{{i}}" class="form-control" rows="2"></textarea>
+                    <button type="button" (click)="removeInstruction(i)" class="remove-item-btn"
+                        [disabled]="instructions.controls.length <= 1">Remove Step</button>
+                </div>
+                <div *ngIf="getInstructionControl(i)?.invalid && (getInstructionControl(i)?.dirty || getInstructionControl(i)?.touched)"
+                    class="validation-errors">
+                    <small *ngIf="getInstructionControl(i)?.errors?.['required']">Instruction step description is
+                        required.</small>
+                </div>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="form-actions">
+            <button type="submit" [disabled]="recipeForm.invalid || isLoading" class="submit-btn">
+                {{ isLoading ? 'Saving...' : (editMode ? 'Update Recipe' : 'Add Recipe') }}
+            </button>
+            <button type="button" routerLink="/recipes" class="cancel-btn" [disabled]="isLoading">
+                Cancel
+            </button>
+        </div>
+    </form>
+</div>
