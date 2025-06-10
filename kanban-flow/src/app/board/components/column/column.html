@@ -1,0 +1,9 @@
+<div class="column">
+    <h2 class="column-title">{{column.title}}</h2>
+    <div class="task-list">
+        @for (task of columnTasks; track $index) {
+        <app-task-card [task]="task"></app-task-card>
+
+        }
+    </div>
+</div>

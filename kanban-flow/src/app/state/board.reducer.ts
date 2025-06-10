@@ -44,7 +44,19 @@ export const boardFeature = createFeature({
             ...state,
             loading: false,
             error,
-        }))
+        })),
+        on(BoardActions.addTaskSuccess, (state, { task }) => {
+            const newTasks = [...state.tasks, task];
+            const newColumns = state.columns.map(col => {
+                if (col.id === task.columnId) {
+                    return {
+                        ...col, taskIds: [...col.taskIds, task.id]
+                    }
+                }
+                return col;
+            })
+            return { ...state, tasks: newTasks, columns: newColumns };
+        })
     )
 })
 

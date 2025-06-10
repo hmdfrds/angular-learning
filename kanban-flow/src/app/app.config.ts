@@ -5,6 +5,8 @@ import { routes } from './app.routes';
 import { provideState, provideStore } from '@ngrx/store';
 import { reducer } from './state/board.reducer';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
+import { provideEffects } from '@ngrx/effects';
+import { BoardEffects } from './state/board.effects';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -13,6 +15,7 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideStore(),
     provideState({ name: 'board', reducer: reducer }),
+    provideEffects(BoardEffects),
     provideStoreDevtools({
       maxAge: 25,
       logOnly: !isDevMode(),

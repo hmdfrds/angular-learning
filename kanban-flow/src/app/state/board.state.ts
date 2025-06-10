@@ -1,4 +1,4 @@
-export interface Task {
+export interface TaskState {
     id: string;
     title: string;
     description?: string;
@@ -7,15 +7,15 @@ export interface Task {
     columnId: string;
 }
 
-export interface Column {
+export interface ColumnState {
     id: string;
     title: string;
     taskIds: string[];
 }
 
 export interface BoardState {
-    columns: Column[];
-    tasks: Task[];
+    columns: ColumnState[];
+    tasks: TaskState[];
     loading: boolean;
     error: string | null;
 }

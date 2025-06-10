@@ -1,0 +1,8 @@
+.board-container {
+    display: flex;
+    gap: 16px;
+    padding: 20px;
+    overflow-x: auto;
+    height: calc(100vh - 40px);
+    background-color: #f4f5f7;
+}
