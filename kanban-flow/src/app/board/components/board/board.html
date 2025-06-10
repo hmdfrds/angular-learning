@@ -1,6 +1,0 @@
-<app-header (addTask)="onAddTask()"></app-header>
-<div class="board-container">
-    @for (column of columns$ | async; track column.id) {
-    <app-column [column]="column" [tasks]="(tasks$|async)||[]"></app-column>
-    }
-</div>
