@@ -1,5 +1,4 @@
 import { Component, computed, inject, signal } from '@angular/core';
-
 import { TaskItemComponent } from './task-item/task-item.component';
 import { TaskService } from '../tasks.service';
 
@@ -26,7 +25,6 @@ export class TasksListComponent {
       default:
         return this.taskService.allTasks();
     }
-
   })
 
 

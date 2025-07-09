@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 
 import { NewTaskComponent } from './new-task/new-task.component';
 import { TasksListComponent } from './tasks-list/tasks-list.component';
+import { TaskService } from './tasks.service';
 
 @Component({
   selector: 'app-tasks',
@@ -9,4 +10,4 @@ import { TasksListComponent } from './tasks-list/tasks-list.component';
   templateUrl: './tasks.component.html',
   imports: [NewTaskComponent, TasksListComponent],
 })
-export class TasksComponent {}
+export class TasksComponent { }
